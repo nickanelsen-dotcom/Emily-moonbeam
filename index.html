@@ -295,6 +295,232 @@
             </div>
         </div>
     </section>
+    <!-- Devotions Section -->
+<section id="devotions" class="shrine-section" style="border-top: 1px solid rgba(251, 191, 36, 0.15); padding-top: 6rem;">
+    <h2 class="section-title">Altar of Devotions</h2>
+    
+    <div class="devotion-container">
+        <!-- The Interactive Scroll Form -->
+        <form id="altarForm" class="parchment-scroll" onsubmit="submitDevotion(event)">
+            <div class="scroll-handle top"></div>
+            
+            <h3 style="font-family: 'Cinzel Decorative', serif; color: #451a03; margin-bottom: 1.5rem; font-size: 1.6rem;">Inscribe Your Vows</h3>
+            
+            <div class="form-group">
+                <label for="devotionTitle">Theme of Worship</label>
+                <input type="text" id="devotionTitle" placeholder="e.g., To Her Eternal Smile, Morning Grace..." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="devotionText">Sacred Text</label>
+                <textarea id="devotionText" rows="6" placeholder="Pour your soul out to Goddess Emily here..." required></textarea>
+            </div>
+            
+            <button type="submit" class="offer-btn">Offer Devotion</button>
+            
+            <div class="scroll-handle bottom"></div>
+        </form>
+
+        <!-- Dynamic Archive Display -->
+        <div class="chronicles-archive">
+            <h3 style="margin-bottom: 2rem; color: var(--gold-glow); text-align: center;">The Sacred Chronicles</h3>
+            <div id="chroniclesFeed" class="feed-container">
+                <!-- Fallback item if no custom letters are written yet -->
+                <div class="archive-card">
+                    <h4>Eternal Foundation</h4>
+                    <p class="archive-date">Era of Beginnings</p>
+                    <p class="archive-body">"To Emily, who rules the wildwoods of my heart. Every leaf that falls whispers your name; every dawn breaks only to witness your beauty."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Additional CSS Styling -->
+<style>
+    .devotion-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+
+    /* Parchment Scroll Design */
+    .parchment-scroll {
+        background: #fcf6e8;
+        background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 0);
+        background-size: 24px 24px;
+        color: #292524;
+        padding: 3rem;
+        border-radius: 4px;
+        box-shadow: 
+            0 10px 30px rgba(0,0,0,0.5),
+            inset 0 0 40px rgba(139, 92, 26, 0.2);
+        position: relative;
+        border-left: 8px solid #d97706;
+        border-right: 8px solid #d97706;
+    }
+
+    /* Vintage Handles for the Scroll Effect */
+    .scroll-handle {
+        position: absolute;
+        left: -12px;
+        right: -12px;
+        height: 14px;
+        background: linear-gradient(90deg, #78350f, #b45309, #78350f);
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .scroll-handle.top { top: -7px; }
+    .scroll-handle.bottom { bottom: -7px; }
+
+    /* Form Fields Styling */
+    .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 0.9rem;
+        color: #78350f;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid #cbd5e1;
+        border-bottom: 2px solid #b45309;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        color: #1c1917;
+        border-radius: 4px;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+        background: #ffffff;
+        box-shadow: 0 0 10px rgba(180, 83, 9, 0.2);
+        border-bottom-color: #78350f;
+    }
+
+    /* Altar Button */
+    .offer-btn {
+        width: 100%;
+        padding: 1rem;
+        background: #14532d;
+        color: #fef08a;
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(20, 83, 45, 0.3);
+    }
+
+    .offer-btn:hover {
+        background: #064e3b;
+        color: #fbbf24;
+        box-shadow: 0 6px 15px rgba(251, 191, 36, 0.2);
+        letter-spacing: 1px;
+    }
+
+    /* Feed Layout */
+    .feed-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    /* Custom scrollbar for the feed */
+    .feed-container::-webkit-scrollbar { width: 6px; }
+    .feed-container::-webkit-scrollbar-thumb { background: var(--gold-glow); border-radius: 10px; }
+
+    /* Submitted Card Look */
+    .archive-card {
+        background: rgba(20, 83, 45, 0.3);
+        border: 1px dashed rgba(251, 191, 36, 0.3);
+        padding: 1.5rem;
+        border-radius: 10px;
+        animation: fadeInScroll 0.6s ease-out;
+    }
+
+    .archive-card h4 {
+        font-family: 'Cinzel Decorative', serif;
+        color: var(--gold-glow);
+        margin-bottom: 0.25rem;
+    }
+
+    .archive-date {
+        font-size: 0.85rem;
+        font-style: italic;
+        color: var(--gold-soft);
+        margin-bottom: 0.75rem;
+    }
+
+    .archive-body {
+        line-height: 1.6;
+        color: var(--cream);
+    }
+
+    @keyframes fadeInScroll {
+        from { opacity: 0; transform: translateY(-15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+        .devotion-container { grid-template-columns: 1fr; gap: 3rem; }
+    }
+</style>
+
+<!-- Functional JavaScript Engine -->
+<script>
+    function submitDevotion(event) {
+        event.preventDefault(); // Prevents page from reloading
+        
+        // Grab values from inputs
+        const titleInput = document.getElementById('devotionTitle');
+        const textInput = document.getElementById('devotionText');
+        const feed = document.getElementById('chroniclesFeed');
+        
+        // Get current system timestamp nicely formatted
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        const timestamp = new Date().toLocaleDateString('en-US', options);
+
+        // Build the physical HTML element for the new submission
+        const newCard = document.createElement('div');
+        newCard.className = 'archive-card';
+        newCard.innerHTML = `
+            <h4>${escapeHTML(titleInput.value)}</h4>
+            <p class="archive-date">${timestamp}</p>
+            <p class="archive-body">"${escapeHTML(textInput.value).replace(/\n/g, '<br>')}"</p>
+        `;
+
+        // Insert new entry right at the top of the timeline feed
+        feed.insertBefore(newCard, feed.firstChild);
+
+        // Clean out form text fields for next entry
+        titleInput.value = '';
+        textInput.value = '';
+    }
+
+    // Helper helper to secure textual inputs from raw HTML breakage
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+    }
+</script>
+
 
 </body>
 </html>
