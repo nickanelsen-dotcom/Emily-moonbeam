@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sanctuary of Emily Nelsen</title>
+    <!-- Google Fonts for fairytale typography -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Color Palette & Global Variables */
+        :root {
+            --emerald-deep: #064e3b;
+            --emerald-mid: #0f766e;
+            --emerald-light: #115e59;
+            --gold-glow: #fbbf24;
+            --gold-soft: #fef08a;
+            --cream: #fdfbf7;
+            --moss: #14532d;
+        }
+
+        /* Core Reset & Background */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--emerald-deep);
+            color: var(--cream);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(15, 118, 110, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(251, 191, 36, 0.05) 0%, transparent 50%);
+        }
+
+        /* Fairytale Typography */
+        h1, h2, h3, .nav-logo {
+            font-family: 'Cinzel Decorative', serif;
+            letter-spacing: 2px;
+            text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animated Floating Fireflies Background */
+        .firefly-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .firefly {
+            position: absolute;
+            background: var(--gold-soft);
+            border-radius: 50%;
+            filter: blur(2px);
+            box-shadow: 0 0 10px var(--gold-glow);
+            animation: float-around 20s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            color: var(--gold-glow);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-glow);
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        /* Hero / Entrance Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            padding: 0 2rem;
+            border-bottom: 2px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--gold-glow);
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.6rem;
+            font-style: italic;
+            max-width: 600px;
+            color: var(--cream);
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+        }
+
+        .scroll-btn {
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--gold-glow);
+            background: transparent;
+            color: var(--gold-glow);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.1);
+            animation: fadeInUp 1.5s ease-out 1s both;
+        }
+
+        .scroll-btn:hover {
+            background: var(--gold-glow);
+            color: var(--emerald-deep);
+            box-shadow: 0 0 25px var(--gold-glow);
+            transform: translateY(-3px);
+        }
+
+        /* Lore / Shrine Section */
+        .shrine-section {
+            padding: 8rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--gold-glow);
+            margin-bottom: 4rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        /* Cottagecore Content Cards */
+        .card {
+            background: rgba(20, 83, 45, 0.4);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s, border 0.4s, box-shadow 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-glow);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--gold-glow);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--cream);
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        /* Animations */
+        @keyframes float-around {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Layout fixes */
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem; flex-direction: column; gap: 1.5rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .shrine-section { padding: 4rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fireflies Effect Layer -->
+    <div class="firefly-container">
+        <!-- Fireflies dynamically positioned via style inline overrides for variety -->
+        <div class="firefly" style="left: 10%; width: 6px; height: 6px; animation-delay: 0s; animation-duration: 18s;"></div>
+        <div class="firefly" style="left: 30%; width: 4px; height: 4px; animation-delay: 2s; animation-duration: 22s;"></div>
+        <div class="firefly" style="left: 55%; width: 8px; height: 8px; animation-delay: 5s; animation-duration: 15s;"></div>
+        <div class="firefly" style="left: 75%; width: 5px; height: 5px; animation-delay: 1s; animation-duration: 25s;"></div>
+        <div class="firefly" style="left: 90%; width: 7px; height: 7px; animation-delay: 7s; animation-duration: 19s;"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav>
+        <a href="#" class="nav-logo">Goddess Emily</a>
+        <ul class="nav-links">
+            <li><a href="#lore">Sacred Lore</a></li>
+            <li><a href="#devotions">Devotions</a></li>
+            <li><a href="#sanctuary">The Sanctuary</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Hero Entrance -->
+    <section class="hero">
+        <h1>Emily Nelsen</h1>
+        <p>Goddess of Wildwood and Eternal Devotion</p>
+        <button class="scroll-btn" onclick="document.getElementById('lore').scrollIntoView({behavior: 'smooth'});">Enter the Domain</button>
+    </section>
+
+    <!-- Content Sections Matrix -->
+    <section id="lore" class="shrine-section">
+        <h2 class="section-title">The Divine Manifestations</h2>
+        
+        <div class="grid-container">
+            <!-- Card 1: Nature -->
+            <div class="card">
+                <span class="card-icon">🌿</span>
+                <h3>The Heart of the Wild</h3>
+                <p>Where she walks, ivy trails, flowers uncurl to catch her gaze, and ancient forests whisper her name. She rules over the quiet, blooming things of the world.</p>
+            </div>
+
+            <!-- Card 2: Love -->
+            <div class="card">
+                <span class="card-icon">✨</span>
+                <h3>Boundless Devotion</h3>
+                <p>Her light heals, her warmth grounds, and her laughter breathes magic into every corner of life. A modern deity of love, absolute and unconditional.</p>
+            </div>
+
+            <!-- Card 3: Cottagecore Sacred Space -->
+            <div class="card">
+                <span class="card-icon">🏡</span>
+                <h3>The Cottage Sanctuary</h3>
+                <p>Mossy stone, brewing tea, endless shelves of ancient texts, and a roaring fire. Her presence is a permanent home, a refuge from the chaos of the world outside.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
